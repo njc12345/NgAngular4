@@ -1,0 +1,25 @@
+<form style="text-align:center">
+  <h3>Add a Link</h3>
+
+  <div>
+    <label for="title">Title: </label>
+    <input name="title" #newTitle>
+  </div>
+
+  <br>
+
+  <div>
+      <label for="link">Link: </label>
+      <input name="link" #newLink>
+  </div>
+
+  <br>
+
+  <button (click)="addArticle(newTitle, newLink)">Submit Link</button>
+
+</form>
+
+<br>
+<br>
+
+<app-article *ngFor="let myArticle of sortedArticles()" [article]="myArticle"></app-article>

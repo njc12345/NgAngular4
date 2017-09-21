@@ -1,0 +1,7 @@
+<div style="text-align: center">
+  {{ article.votes }} Points : 
+  <a href="{{ article.link }}">{{ article.title }} ({{ article.domain() }})</a> :
+  <a href (click)="voteUp()">upvote</a> : 
+  <a href (click)="voteDown()">downvote</a>
+</div>
+
