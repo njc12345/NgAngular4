@@ -1,0 +1,20 @@
+<h2>Demo Form: Sku</h2>
+
+<!--
+<form #myForm="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <label for="skuInput">SKU: </label>
+  <input type="text" id="skuInput" placeholder="SKU" name="sku" ngModel>
+  <button type="submit">Submit</button>
+</form>
+-->
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+    <label for="skuInput">SKU: </label>
+    <input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']">
+
+    <div *ngIf="!sku.valid">SKU is invalid</div>
+    <div *ngIf="myForm.controls['sku'].hasError('required')">SKU is required</div>
+    <div *ngIf="!myForm.valid">Form is invalid</div>
+
+    <button type="submit">Submit</button>
+</form>
