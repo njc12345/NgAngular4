@@ -1,5 +1,7 @@
 <h2>Demo Form: Sku</h2>
 
+<div>The product name is {{productName}}</div>
+
 <!--
 <form #myForm="ngForm" (ngSubmit)="onSubmit(f.value)">
   <label for="skuInput">SKU: </label>
@@ -9,11 +11,14 @@
 -->
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+    <label for="productNameInput">Product Name: </label>
+    <input type="text" id="productNameInput" placeholder="Product Name" [formControl]="myForm.controls['productName']" [(ngModel)]="productName">
+    
     <label for="skuInput">SKU: </label>
     <input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']">
-
     <div *ngIf="!sku.valid">SKU is invalid</div>
     <div *ngIf="myForm.controls['sku'].hasError('required')">SKU is required</div>
+    <div *ngIf="sku.hasError('invalidSku')">SKU must begin with 123</div>
     <div *ngIf="!myForm.valid">Form is invalid</div>
 
     <button type="submit">Submit</button>
