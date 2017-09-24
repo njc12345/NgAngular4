@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+</div>
+
+<div>
+  <p *ngIf="userName">
+    Welcome {{userName}}
+  </p>
+
+  <p *ngIf="userName1">
+      Welcome {{userName1}}
+    </p>
+
+
+  <button (click)="signIn()">Sign In</button>
+</div>
