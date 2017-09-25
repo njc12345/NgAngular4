@@ -1,6 +1,8 @@
 import { Component, ReflectiveInjector, Inject } from '@angular/core';
 import { UserServiceManualInjectionService } from './user-service-manual-injection.service';
 import { UserServiceService } from './user-service.service';
+import { AnalyticsService } from './analytics.service';
+import { Metric } from './metric';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +17,15 @@ export class AppComponent {
   userServiceManual: UserServiceManualInjectionService;
   myUrl: string;
 
-  constructor(private userService: UserServiceService, @Inject('MY_URL') myUrl: string){
+  constructor(private userService: UserServiceService, @Inject('MY_URL') myUrl: string, private analyticsService: AnalyticsService){
     const injector: any = ReflectiveInjector.resolveAndCreate([UserServiceManualInjectionService]);
     this.userServiceManual = injector.get(UserServiceManualInjectionService);
     this.myUrl = myUrl;
+
+    this.analyticsService.record({
+      eventName: 'componentCreated',
+      scope: 'AnalyticsDemo'
+    });
   }
 
   signIn(): void{
@@ -36,6 +43,11 @@ export class AppComponent {
     console.log('User name from manual service is: ', this.userName);
     console.log('User name from ngmodule service is: ', this.userName1);
     console.log('URL injected is: ', this.myUrl);
+
+    this.analyticsService.record({
+      eventName: 'SignInButtonPressed',
+      scope: this.userName
+    });
   }
 
 }
